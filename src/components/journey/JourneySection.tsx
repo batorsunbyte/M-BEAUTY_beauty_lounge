@@ -157,7 +157,7 @@ export default function JourneySection() {
         className="sticky top-0 h-svh overflow-hidden flex flex-col"
         style={{ background: 'var(--color-section-bg-1)' }}
       >
-        <AuroraBackground />
+        <AuroraBackground dust={14} />
 
         {/* Header */}
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 pt-20 md:pt-[96px] pb-2 shrink-0">

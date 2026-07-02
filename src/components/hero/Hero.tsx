@@ -25,8 +25,8 @@ export default function Hero() {
         background: 'linear-gradient(165deg, var(--color-hero-bg-1) 0%, var(--color-hero-bg-2) 35%, var(--color-hero-bg-3) 65%, var(--color-hero-bg-1) 100%)',
       }}
     >
-      {/* Living background: drifting rose-gold aurora + sparkles */}
-      <AuroraBackground />
+      {/* Living background: drifting rose-gold aurora, gold dust, silk threads + sparkles */}
+      <AuroraBackground dust={26} silk />
       <SparkleBackground particleColor="#BD7F6C" speed={2} particleDensity={80} />
 
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 pt-[104px] pb-28 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">

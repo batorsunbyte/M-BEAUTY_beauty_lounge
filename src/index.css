@@ -105,11 +105,14 @@
 
 :root {
   /* Aurora background (animated brand glow) */
-  --aurora-1: rgba(217,160,143,0.20);
-  --aurora-2: rgba(189,127,108,0.15);
-  --aurora-3: rgba(236,202,189,0.16);
-  --aurora-sheen: rgba(217,160,143,0.07);
+  --aurora-1: rgba(217,160,143,0.34);
+  --aurora-2: rgba(189,127,108,0.26);
+  --aurora-3: rgba(236,202,189,0.28);
+  --aurora-sheen: rgba(217,160,143,0.11);
   --aurora-grain-opacity: 0.035;
+  --aurora-dust-core: rgba(190,120,95,0.95);
+  --aurora-dust-glow: rgba(189,127,108,0.55);
+  --aurora-silk: rgba(189,127,108,0.5);
 
   --color-text: #3D2B26;
   --color-text-muted: #7A6259;
@@ -180,11 +183,14 @@
 
 .dark {
   /* Aurora background — richer in the dark signature look */
-  --aurora-1: rgba(217,160,143,0.15);
-  --aurora-2: rgba(156,95,78,0.20);
-  --aurora-3: rgba(236,202,189,0.09);
-  --aurora-sheen: rgba(217,160,143,0.055);
+  --aurora-1: rgba(217,160,143,0.28);
+  --aurora-2: rgba(156,95,78,0.38);
+  --aurora-3: rgba(236,202,189,0.17);
+  --aurora-sheen: rgba(217,160,143,0.10);
   --aurora-grain-opacity: 0.06;
+  --aurora-dust-core: rgba(240,215,200,0.95);
+  --aurora-dust-glow: rgba(217,160,143,0.5);
+  --aurora-silk: rgba(217,160,143,0.55);
 
   --color-text: #d9cfca;
   --color-text-muted: #a39790;
@@ -330,19 +336,19 @@
 /* ── Aurora background (transform-only → GPU-friendly) ── */
 
 @keyframes auroraDrift1 {
-  0%, 100% { transform: translate3d(-6%, -4%, 0) scale(1); }
-  50%      { transform: translate3d(9%, 7%, 0) scale(1.18); }
+  0%, 100% { transform: translate3d(-10%, -7%, 0) scale(1); }
+  50%      { transform: translate3d(14%, 10%, 0) scale(1.25); }
 }
 
 @keyframes auroraDrift2 {
-  0%, 100% { transform: translate3d(5%, 6%, 0) scale(1.1); }
-  50%      { transform: translate3d(-8%, -6%, 0) scale(0.94); }
+  0%, 100% { transform: translate3d(8%, 9%, 0) scale(1.15); }
+  50%      { transform: translate3d(-12%, -9%, 0) scale(0.9); }
 }
 
 @keyframes auroraDrift3 {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-  33%      { transform: translate3d(-10%, 8%, 0) scale(1.12) rotate(4deg); }
-  66%      { transform: translate3d(8%, -6%, 0) scale(0.96) rotate(-4deg); }
+  33%      { transform: translate3d(-14%, 11%, 0) scale(1.18) rotate(6deg); }
+  66%      { transform: translate3d(12%, -9%, 0) scale(0.92) rotate(-6deg); }
 }
 
 @keyframes auroraSpin {
@@ -365,7 +371,7 @@
   top: -18%;
   inset-inline-start: -14%;
   background: radial-gradient(circle at 42% 42%, var(--aurora-1), transparent 65%);
-  animation: auroraDrift1 26s ease-in-out infinite;
+  animation: auroraDrift1 18s ease-in-out infinite;
 }
 
 .aurora-orb-2 {
@@ -376,7 +382,7 @@
   bottom: -16%;
   inset-inline-end: -10%;
   background: radial-gradient(circle at 55% 45%, var(--aurora-2), transparent 65%);
-  animation: auroraDrift2 32s ease-in-out infinite;
+  animation: auroraDrift2 23s ease-in-out infinite;
 }
 
 .aurora-orb-3 {
@@ -387,7 +393,7 @@
   top: 26%;
   inset-inline-start: 42%;
   background: radial-gradient(circle at 50% 50%, var(--aurora-3), transparent 62%);
-  animation: auroraDrift3 40s ease-in-out infinite;
+  animation: auroraDrift3 30s ease-in-out infinite;
 }
 
 .aurora-sheen {
@@ -443,21 +449,111 @@
   pointer-events: none;
 }
 
+/* ── Gold dust: tiny glowing particles floating upwards ── */
+
+@keyframes dustFloat {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(var(--dust-drift, 0px), -118vh, 0); }
+}
+
+@keyframes dustTwinkle {
+  0%, 100% { opacity: 0.05; }
+  50%      { opacity: 0.9; }
+}
+
+.aurora-dust-p {
+  position: absolute;
+  bottom: -4%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--aurora-dust-core) 0%, var(--aurora-dust-glow) 45%, transparent 72%);
+  box-shadow: 0 0 6px 1px var(--aurora-dust-glow);
+  animation:
+    dustFloat var(--dust-dur, 20s) linear infinite,
+    dustTwinkle var(--dust-twinkle, 3.4s) ease-in-out infinite;
+  animation-delay: var(--dust-delay, 0s), var(--dust-twinkle-delay, 0s);
+}
+
+/* ── Silk lines: soft curved threads breathing behind the hero,
+      with small light pearls travelling along them ── */
+
+@keyframes silkBreathe {
+  0%, 100% { opacity: 0.3; transform: translate3d(0, -8px, 0); }
+  50%      { opacity: 0.65; transform: translate3d(0, 10px, 0); }
+}
+
+@keyframes silkPearl {
+  0%   { offset-distance: 0%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+.aurora-silk {
+  position: absolute;
+  inset: 0;
+  animation: silkBreathe 12s ease-in-out infinite;
+}
+
+.aurora-silk svg {
+  width: 100%;
+  height: 100%;
+}
+
+.aurora-pearl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,240,230,0.95) 0%, var(--aurora-dust-glow) 55%, transparent 75%);
+  box-shadow: 0 0 12px 3px var(--aurora-dust-glow);
+  display: none; /* enabled only where offset-path is supported */
+}
+
+@supports (offset-path: path('M 0 0 L 10 10')) {
+  .aurora-pearl {
+    display: block;
+    offset-path: var(--pearl-path);
+    offset-rotate: 0deg;
+    animation: silkPearl var(--pearl-dur, 11s) linear infinite;
+    animation-delay: var(--pearl-delay, 0s);
+  }
+}
+
 /* Aurora is paused via IntersectionObserver when its section is offscreen
    (see AuroraBackground.tsx) — the compositor goes idle, saving battery. */
 .aurora-paused .aurora-orb,
-.aurora-paused .aurora-sheen {
+.aurora-paused .aurora-sheen,
+.aurora-paused .aurora-dust-p,
+.aurora-paused .aurora-silk,
+.aurora-paused .aurora-pearl {
   animation-play-state: paused;
 }
 
 /* Phones: shrink the aurora footprint — no giant rotating sheen layer,
-   lighter blur. Visually near-identical, roughly halves GPU memory. */
+   lighter blur, half the dust particles. Visually near-identical,
+   roughly halves GPU memory. */
 @media (max-width: 768px) {
   .aurora-orb {
     filter: blur(40px);
   }
   .aurora-sheen {
     display: none;
+  }
+  .aurora-dust-p:nth-child(even) {
+    display: none;
+  }
+}
+
+/* Reduced motion: frozen mid-air dust / pearls would look like dirt on
+   the screen — hide the particle layers entirely (orbs degrade to a
+   static, still pleasant glow via the global animation reset). */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-dust-p,
+  .aurora-pearl,
+  .aurora-silk {
+    display: none !important;
   }
 }
 
