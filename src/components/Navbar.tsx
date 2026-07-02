@@ -1,7 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Sun, Moon } from 'lucide-react'
-import { useTheme } from '../hooks/useTheme'
 import { useLanguage } from '../i18n/LanguageContext'
 import { LANGUAGES } from '../i18n/translations'
 
@@ -11,8 +9,13 @@ const NAV_HREFS = [
   { href: '#contact', key: 'contact' as const },
 ]
 
+/* Light-theme ink colors (site runs permanently in the light look) */
+const INK_HEADING = '#1F1310'
+const INK_NAV = '#55443F'
+const INK_MUTED = '#7A6259'
+
 /* ── Segmented 3-way language switcher (DE | EN | عربي) ── */
-function LangSwitcher({ isDark }: { isDark: boolean }) {
+function LangSwitcher() {
   const { language, setLanguage, t } = useLanguage()
   return (
     <div
@@ -21,7 +24,7 @@ function LangSwitcher({ isDark }: { isDark: boolean }) {
       className="inline-flex items-center rounded-full p-0.5 border"
       style={{
         borderColor: 'var(--color-border)',
-        background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.75)',
+        background: 'rgba(255,255,255,0.75)',
       }}
     >
       {LANGUAGES.map((l) => {
@@ -35,7 +38,7 @@ function LangSwitcher({ isDark }: { isDark: boolean }) {
             className="px-2 py-0.5 md:px-2.5 md:py-1 rounded-full text-[0.62rem] md:text-[0.68rem] font-bold tracking-wider transition-all duration-300 cursor-pointer"
             style={{
               background: active ? 'var(--primary)' : 'transparent',
-              color: active ? '#ffffff' : isDark ? '#a39790' : '#7A6259',
+              color: active ? '#ffffff' : INK_MUTED,
             }}
           >
             {l.label}
@@ -47,12 +50,12 @@ function LangSwitcher({ isDark }: { isDark: boolean }) {
 }
 
 /* ── Brand lockup: MStyle over a letterspaced BEAUTY LOUNGE line ── */
-function BrandLogo({ color }: { color: string }) {
+function BrandLogo() {
   return (
     <Link to="/" className="flex flex-col leading-none cursor-pointer select-none whitespace-nowrap shrink-0">
       <span
         className="text-[1.25rem] md:text-[1.4rem] font-semibold"
-        style={{ fontFamily: 'var(--font-heading)', color }}
+        style={{ fontFamily: 'var(--font-heading)', color: INK_HEADING }}
       >
         M<span className="text-primary">Style</span>
       </span>
@@ -67,9 +70,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
-  const { theme, toggleTheme } = useTheme()
   const { t } = useLanguage()
-  const isDark = theme === 'dark'
 
   /* ── Scroll detection ────────────────────────────────── */
   useEffect(() => {
@@ -102,10 +103,6 @@ export default function Navbar() {
     }
   }, [location.pathname, closeMenu])
 
-  const logoColor = isDark ? '#f0e7e2' : '#1F1310'
-  const navLinkColor = isDark ? '#d9cfca' : '#55443F'
-  const hamburgerColor = isDark ? '#f0e7e2' : '#1F1310'
-
   return (
     <nav
       className="fixed top-0 left-0 right-0 h-[72px] z-[100] transition-[background-color,backdrop-filter,box-shadow] duration-300"
@@ -115,9 +112,7 @@ export default function Navbar() {
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
         WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
         boxShadow: scrolled
-          ? isDark
-            ? '0 1px 3px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.4)'
-            : '0 1px 3px rgba(64,34,25,0.04), 0 4px 16px rgba(64,34,25,0.06)'
+          ? '0 1px 3px rgba(64,34,25,0.04), 0 4px 16px rgba(64,34,25,0.06)'
           : 'none',
       }}
       aria-label="Main navigation"
@@ -126,7 +121,7 @@ export default function Navbar() {
       <div className="w-full max-w-[1200px] mx-auto px-6 flex items-center justify-between h-full">
 
         {/* Logo */}
-        <BrandLogo color={logoColor} />
+        <BrandLogo />
 
         {/* Desktop links — right side */}
         <div className="hidden md:flex items-center gap-10">
@@ -141,7 +136,7 @@ export default function Navbar() {
                          after:h-[2px] after:w-0 after:bg-primary after:rounded-full
                          after:transition-[width] after:duration-300
                          hover:after:w-full"
-              style={{ color: navLinkColor, transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)', fontFamily: 'var(--font-nav)' }}
+              style={{ color: INK_NAV, transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)', fontFamily: 'var(--font-nav)' }}
             >
               {t.nav[link.key]}
             </Link>
@@ -154,46 +149,18 @@ export default function Navbar() {
                        after:h-[2px] after:w-0 after:bg-primary after:rounded-full
                        after:transition-[width] after:duration-300
                        hover:after:w-full"
-            style={{ color: navLinkColor, transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)', fontFamily: 'var(--font-nav)' }}
+            style={{ color: INK_NAV, transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)', fontFamily: 'var(--font-nav)' }}
           >
             {t.nav.gallery}
           </Link>
 
           {/* Language switcher */}
-          <LangSwitcher isDark={isDark} />
-
-          {/* Theme toggle */}
-          <button
-            onClick={toggleTheme}
-            className="relative w-9 h-9 rounded-full flex items-center justify-center
-                       transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer
-                       border border-[var(--color-border)]"
-            style={{
-              background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.8)',
-              color: isDark ? '#d9a08f' : '#bd7f6c',
-            }}
-            aria-label={isDark ? t.nav.switchLight : t.nav.switchDark}
-          >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+          <LangSwitcher />
         </div>
 
-        {/* Mobile: language switcher + theme toggle + hamburger */}
+        {/* Mobile: language switcher + hamburger */}
         <div className="hidden max-md:flex items-center gap-2">
-          <LangSwitcher isDark={isDark} />
-          <button
-            onClick={toggleTheme}
-            className="w-9 h-9 rounded-full flex items-center justify-center
-                       transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer
-                       border border-[var(--color-border)]"
-            style={{
-              background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.8)',
-              color: isDark ? '#d9a08f' : '#bd7f6c',
-            }}
-            aria-label={isDark ? t.nav.switchLight : t.nav.switchDark}
-          >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+          <LangSwitcher />
 
           {/* Hamburger */}
           <button
@@ -205,19 +172,19 @@ export default function Navbar() {
             <span
               className="block w-[22px] h-[2px] rounded-full transition-[transform,opacity] duration-300"
               style={{
-                backgroundColor: menuOpen ? '#bd7f6c' : hamburgerColor,
+                backgroundColor: menuOpen ? '#bd7f6c' : INK_HEADING,
                 transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
                 transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'none',
               }}
             />
             <span
               className="block w-[22px] h-[2px] rounded-full transition-opacity duration-200"
-              style={{ backgroundColor: hamburgerColor, opacity: menuOpen ? 0 : 1 }}
+              style={{ backgroundColor: INK_HEADING, opacity: menuOpen ? 0 : 1 }}
             />
             <span
               className="block w-[22px] h-[2px] rounded-full transition-[transform] duration-300"
               style={{
-                backgroundColor: menuOpen ? '#bd7f6c' : hamburgerColor,
+                backgroundColor: menuOpen ? '#bd7f6c' : INK_HEADING,
                 transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
                 transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none',
               }}
@@ -248,7 +215,7 @@ export default function Navbar() {
                        transition-all duration-300 hover:text-primary hover:tracking-[0.04em]"
             style={{
               fontFamily: 'var(--font-nav)',
-              color: isDark ? '#f0e7e2' : '#1F1310',
+              color: INK_HEADING,
               transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
               opacity: menuOpen ? 1 : 0,
               transform: menuOpen ? 'translateY(0)' : 'translateY(12px)',
@@ -265,7 +232,7 @@ export default function Navbar() {
                      transition-all duration-300 hover:text-primary hover:tracking-[0.04em]"
           style={{
             fontFamily: 'var(--font-nav)',
-            color: isDark ? '#f0e7e2' : '#1F1310',
+            color: INK_HEADING,
             transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
             opacity: menuOpen ? 1 : 0,
             transform: menuOpen ? 'translateY(0)' : 'translateY(12px)',

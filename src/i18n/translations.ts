@@ -16,8 +16,6 @@ export interface TranslationStrings {
     services: string
     contact: string
     gallery: string
-    switchLight: string
-    switchDark: string
     toggleMenu: string
     language: string
   }
@@ -158,8 +156,6 @@ const de: TranslationStrings = {
     services: 'Leistungen',
     contact: 'Kontakt',
     gallery: 'Galerie',
-    switchLight: 'Zum hellen Modus wechseln',
-    switchDark: 'Zum dunklen Modus wechseln',
     toggleMenu: 'Menü umschalten',
     language: 'Sprache wählen',
   },
@@ -385,8 +381,6 @@ const en: TranslationStrings = {
     services: 'Services',
     contact: 'Contact',
     gallery: 'Gallery',
-    switchLight: 'Switch to light mode',
-    switchDark: 'Switch to dark mode',
     toggleMenu: 'Toggle menu',
     language: 'Choose language',
   },
@@ -612,8 +606,6 @@ const ar: TranslationStrings = {
     services: 'خدماتنا',
     contact: 'اتصلي بنا',
     gallery: 'المعرض',
-    switchLight: 'التبديل إلى الوضع الفاتح',
-    switchDark: 'التبديل إلى الوضع الداكن',
     toggleMenu: 'فتح/إغلاق القائمة',
     language: 'اختاري اللغة',
   },

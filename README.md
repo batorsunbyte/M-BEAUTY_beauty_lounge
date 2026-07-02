@@ -10,7 +10,7 @@ Website für **MStyle Beauty Lounge** — Beauty Lounge für Damen am Floridsdor
 - Tailwind CSS v4 (Token-System in `src/index.css`)
 - framer-motion, HashRouter
 - Eigenes i18n (`src/i18n/`) — **Deutsch / English / العربية** inkl. RTL-Support
-- Dark Mode als Marken-Default (Schwarz + Roségold), Light Mode verfügbar
+- Fester heller Rosé-Look (Dark Mode auf Kundenwunsch deaktiviert — Code in `useTheme.tsx`/`index.css` erhalten, reaktivierbar)
 
 ## Leistungen (Inhalt)
 

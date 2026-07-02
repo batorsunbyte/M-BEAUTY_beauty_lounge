@@ -181,6 +181,9 @@
   --sidebar-primary-foreground: #ffffff;
 }
 
+/* NOTE: dark mode is DISABLED (client decision 2026-07-02) — the .dark
+   class is never set (see useTheme.tsx), so this whole block is inert.
+   It is kept so dark could be re-enabled without redesigning. */
 .dark {
   /* Aurora background — richer in the dark signature look */
   --aurora-1: rgba(217,160,143,0.28);
