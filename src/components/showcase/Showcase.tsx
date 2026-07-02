@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react'
 import { SparkleBackground } from '@/components/ui/SparkleBackground'
 import SectionHeader from '@/components/ui/SectionHeader'
 import BentoTile from '@/components/ui/BentoTile'
@@ -57,9 +58,10 @@ export default function Showcase() {
         <div className="mt-10 md:mt-12 flex max-md:justify-center">
           <a
             href="#contact"
-            className="btn-shimmer inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium text-sm tracking-wide text-white bg-primary hover:bg-primary-hover transition-all duration-300 active:scale-[0.97]"
+            className="group btn-shimmer inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium text-sm tracking-wide text-white bg-primary hover:bg-primary-hover transition-all duration-300 hover:scale-[1.04] active:scale-[0.97]"
           >
             {t.services.cta}
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true" />
           </a>
         </div>
       </div>

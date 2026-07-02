@@ -1,5 +1,6 @@
 import Hero from '../components/hero/Hero'
 import Showcase from '../components/showcase/Showcase'
+import MarqueeBand from '../components/ui/MarqueeBand'
 import JourneySection from '../components/journey/JourneySection'
 import BeforeAfterSection from '../components/beforeafter/BeforeAfterSection'
 import ShuttleSection from '../components/shuttle/ShuttleSection'
@@ -18,10 +19,12 @@ export default function Home() {
     <>
       <Hero />
       <Showcase />
+      <MarqueeBand />
       <JourneySection />
       <BeforeAfterSection />
       <ShuttleSection />
       <TestimonialsDemo />
+      <MarqueeBand reverse />
       <ContactSection />
     </>
   )

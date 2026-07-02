@@ -31,6 +31,8 @@ export interface TranslationStrings {
     ctaSecondary: string
     stats: Array<{ value: string; label: string }>
     ticker: string[]
+    /** big outline words for the marquee bands between sections */
+    marquee: string[]
   }
 
   // Services bento section
@@ -185,6 +187,7 @@ const de: TranslationStrings = {
       'Laser-Haarentfernung',
       'Fahrservice',
     ],
+    marquee: ['Schönheit', 'Selbstbewusstsein', 'Du', 'MStyle'],
   },
 
   services: {
@@ -410,6 +413,7 @@ const en: TranslationStrings = {
       'Laser Hair Removal',
       'Shuttle Service',
     ],
+    marquee: ['Beauty', 'Confidence', 'You', 'MStyle'],
   },
 
   services: {
@@ -635,6 +639,7 @@ const ar: TranslationStrings = {
       'إزالة الشعر بالليزر',
       'خدمة التوصيل',
     ],
+    marquee: ['جمالُكِ', 'ثقتُكِ', 'أنتِ', 'MStyle'],
   },
 
   services: {

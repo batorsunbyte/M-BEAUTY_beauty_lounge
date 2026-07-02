@@ -424,6 +424,54 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
 }
 
+/* ── Outline marquee bands (big slogan words between sections) ── */
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marqueeScroll var(--marquee-dur, 42s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-track.marquee-reverse {
+  animation-direction: reverse;
+}
+
+.marquee-word {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+  line-height: 1.15;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--primary) 55%, transparent);
+  paint-order: stroke fill;
+}
+
+.marquee-word.marquee-word-filled {
+  color: var(--primary);
+  -webkit-text-stroke: 0;
+  font-style: italic;
+}
+
+/* ── Rotating circular badge (hero) ── */
+
+@keyframes badgeSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.badge-spin {
+  animation: badgeSpin 22s linear infinite;
+  will-change: transform;
+}
+
 /* ── Primary CTA shimmer sweep ── */
 
 @keyframes btnShimmer {
