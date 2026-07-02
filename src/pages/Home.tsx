@@ -1,5 +1,7 @@
 import Hero from '../components/hero/Hero'
 import Showcase from '../components/showcase/Showcase'
+import JourneySection from '../components/journey/JourneySection'
+import BeforeAfterSection from '../components/beforeafter/BeforeAfterSection'
 import ShuttleSection from '../components/shuttle/ShuttleSection'
 import TestimonialsDemo from '../components/testimonials/Demo'
 import ContactSection from '../components/contact/ContactSection'
@@ -16,6 +18,8 @@ export default function Home() {
     <>
       <Hero />
       <Showcase />
+      <JourneySection />
+      <BeforeAfterSection />
       <ShuttleSection />
       <TestimonialsDemo />
       <ContactSection />

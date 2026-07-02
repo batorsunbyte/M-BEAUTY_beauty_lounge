@@ -104,6 +104,13 @@
    ============================================================ */
 
 :root {
+  /* Aurora background (animated brand glow) */
+  --aurora-1: rgba(217,160,143,0.20);
+  --aurora-2: rgba(189,127,108,0.15);
+  --aurora-3: rgba(236,202,189,0.16);
+  --aurora-sheen: rgba(217,160,143,0.07);
+  --aurora-grain-opacity: 0.035;
+
   --color-text: #3D2B26;
   --color-text-muted: #7A6259;
   --color-text-heading: #1F1310;
@@ -172,6 +179,13 @@
 }
 
 .dark {
+  /* Aurora background — richer in the dark signature look */
+  --aurora-1: rgba(217,160,143,0.15);
+  --aurora-2: rgba(156,95,78,0.20);
+  --aurora-3: rgba(236,202,189,0.09);
+  --aurora-sheen: rgba(217,160,143,0.055);
+  --aurora-grain-opacity: 0.06;
+
   --color-text: #d9cfca;
   --color-text-muted: #a39790;
   --color-text-heading: #f0e7e2;
@@ -311,6 +325,140 @@
 @keyframes panelGlow {
   0%, 100% { box-shadow: 0 8px 32px rgba(189,127,108,0.14), 0 2px 8px rgba(64,34,25,0.05); }
   50%      { box-shadow: 0 12px 40px rgba(189,127,108,0.20), 0 4px 12px rgba(64,34,25,0.06); }
+}
+
+/* ── Aurora background (transform-only → GPU-friendly) ── */
+
+@keyframes auroraDrift1 {
+  0%, 100% { transform: translate3d(-6%, -4%, 0) scale(1); }
+  50%      { transform: translate3d(9%, 7%, 0) scale(1.18); }
+}
+
+@keyframes auroraDrift2 {
+  0%, 100% { transform: translate3d(5%, 6%, 0) scale(1.1); }
+  50%      { transform: translate3d(-8%, -6%, 0) scale(0.94); }
+}
+
+@keyframes auroraDrift3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  33%      { transform: translate3d(-10%, 8%, 0) scale(1.12) rotate(4deg); }
+  66%      { transform: translate3d(8%, -6%, 0) scale(0.96) rotate(-4deg); }
+}
+
+@keyframes auroraSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  will-change: transform;
+}
+
+.aurora-orb-1 {
+  width: max(340px, 52vw);
+  height: max(340px, 52vw);
+  max-width: 820px;
+  max-height: 820px;
+  top: -18%;
+  inset-inline-start: -14%;
+  background: radial-gradient(circle at 42% 42%, var(--aurora-1), transparent 65%);
+  animation: auroraDrift1 26s ease-in-out infinite;
+}
+
+.aurora-orb-2 {
+  width: max(300px, 42vw);
+  height: max(300px, 42vw);
+  max-width: 680px;
+  max-height: 680px;
+  bottom: -16%;
+  inset-inline-end: -10%;
+  background: radial-gradient(circle at 55% 45%, var(--aurora-2), transparent 65%);
+  animation: auroraDrift2 32s ease-in-out infinite;
+}
+
+.aurora-orb-3 {
+  width: max(260px, 34vw);
+  height: max(260px, 34vw);
+  max-width: 540px;
+  max-height: 540px;
+  top: 26%;
+  inset-inline-start: 42%;
+  background: radial-gradient(circle at 50% 50%, var(--aurora-3), transparent 62%);
+  animation: auroraDrift3 40s ease-in-out infinite;
+}
+
+.aurora-sheen {
+  position: absolute;
+  inset: -45%;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    var(--aurora-sheen) 45deg,
+    transparent 100deg,
+    transparent 190deg,
+    var(--aurora-sheen) 250deg,
+    transparent 310deg
+  );
+  animation: auroraSpin 70s linear infinite;
+  will-change: transform;
+}
+
+.aurora-grain {
+  position: absolute;
+  inset: 0;
+  opacity: var(--aurora-grain-opacity);
+  mix-blend-mode: overlay;
+  background-size: 180px 180px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* ── Primary CTA shimmer sweep ── */
+
+@keyframes btnShimmer {
+  0%, 72% { transform: translateX(-180%) skewX(-18deg); }
+  100%    { transform: translateX(340%) skewX(-18deg); }
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.32), transparent);
+  /* Base transform keeps the streak OFF the button when the animation is
+     neutralized (prefers-reduced-motion) — otherwise a static white bar
+     would sit on the CTA. */
+  transform: translateX(-180%) skewX(-18deg);
+  animation: btnShimmer 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Aurora is paused via IntersectionObserver when its section is offscreen
+   (see AuroraBackground.tsx) — the compositor goes idle, saving battery. */
+.aurora-paused .aurora-orb,
+.aurora-paused .aurora-sheen {
+  animation-play-state: paused;
+}
+
+/* Phones: shrink the aurora footprint — no giant rotating sheen layer,
+   lighter blur. Visually near-identical, roughly halves GPU memory. */
+@media (max-width: 768px) {
+  .aurora-orb {
+    filter: blur(40px);
+  }
+  .aurora-sheen {
+    display: none;
+  }
 }
 
 /* ── Base Resets ──────────────────────────────────────────── */

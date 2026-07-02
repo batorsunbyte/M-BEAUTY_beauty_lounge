@@ -114,6 +114,20 @@ export const galleryWork = [
   { local: asset('images/gallery/work-8.jpg'), fallback: 'https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=900&h=600&fit=crop&q=80' },  // styling stations
 ] as const
 
+// --- Journey (scroll story, order = t.journey.steps) ---
+export const journeyImages = [
+  { local: asset('images/journey/step-1.jpg'), fallback: 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=900&h=1100&fit=crop&q=80' },  // wash & care
+  { local: asset('images/journey/step-2.jpg'), fallback: 'https://images.unsplash.com/photo-1560869713-7d0a29430803?w=900&h=1100&fit=crop&q=80' },   // curls & styling
+  { local: asset('images/journey/step-3.jpg'), fallback: 'https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?w=900&h=1100&fit=crop&q=80' }, // up-do finishing touches
+  { local: asset('images/journey/step-4.jpg'), fallback: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=900&h=1100&fit=crop&q=80' }, // big-night reveal
+] as const
+
+// --- Before/after comparison (one portrait; "before" is graded via CSS filter) ---
+export const beforeAfterImage = {
+  local: asset('images/before-after/result.jpg'),
+  fallback: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1100&h=1300&fit=crop&crop=faces&q=80',
+} as const
+
 /** Image entry with local + fallback */
 export interface ImageEntry {
   local: string

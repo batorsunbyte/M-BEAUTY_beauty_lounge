@@ -1,31 +1,32 @@
+import { useRef } from 'react'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { SparkleBackground } from '@/components/ui/SparkleBackground'
+import { AuroraBackground } from '@/components/ui/AuroraBackground'
 import BentoTile from '@/components/ui/BentoTile'
 import { heroImages } from '@/lib/images'
 
 export default function Hero() {
   const { t } = useLanguage()
   const h = heroImages
+  const reduce = useReducedMotion()
+  const sectionRef = useRef<HTMLElement>(null)
+
+  /* Subtle parallax: the image cluster drifts up slower than the page scrolls. */
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
+  const bentoY = useTransform(scrollYProgress, [0, 1], [0, -70])
 
   return (
     <section
       id="hero"
+      ref={sectionRef}
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{
         background: 'linear-gradient(165deg, var(--color-hero-bg-1) 0%, var(--color-hero-bg-2) 35%, var(--color-hero-bg-3) 65%, var(--color-hero-bg-1) 100%)',
       }}
     >
-      {/* Background glow */}
-      <div
-        className="absolute inset-0 opacity-60 z-0"
-        aria-hidden="true"
-        style={{
-          backgroundImage:
-            'radial-gradient(ellipse 700px 500px at 12% 25%, rgba(217,160,143,0.07) 0%, transparent 100%),' +
-            'radial-gradient(ellipse 500px 500px at 88% 15%, rgba(189,127,108,0.09) 0%, transparent 100%),' +
-            'radial-gradient(ellipse 600px 400px at 80% 85%, rgba(217,160,143,0.05) 0%, transparent 100%)',
-        }}
-      />
+      {/* Living background: drifting rose-gold aurora + sparkles */}
+      <AuroraBackground />
       <SparkleBackground particleColor="#BD7F6C" speed={2} particleDensity={80} />
 
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 pt-[104px] pb-28 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -56,7 +57,7 @@ export default function Hero() {
           <div className="flex flex-wrap gap-3 mb-10 max-lg:justify-center">
             <a
               href="#contact"
-              className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm tracking-wide text-white bg-primary hover:bg-primary-hover transition-all duration-300 active:scale-[0.97]"
+              className="btn-shimmer inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm tracking-wide text-white bg-primary hover:bg-primary-hover transition-all duration-300 active:scale-[0.97]"
             >
               {t.hero.ctaPrimary}
             </a>
@@ -84,13 +85,16 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── Right: bento image cluster ── */}
-        <div className="grid grid-cols-2 auto-rows-[110px] md:auto-rows-[140px] gap-3 md:gap-4">
+        {/* ── Right: bento image cluster (parallax) ── */}
+        <motion.div
+          className="grid grid-cols-2 auto-rows-[110px] md:auto-rows-[140px] gap-3 md:gap-4"
+          style={reduce ? undefined : { y: bentoY }}
+        >
           <BentoTile className="col-span-1 row-span-2" src={h.portrait.local} fallback={h.portrait.fallback} eager index={0} />
           <BentoTile className="col-span-1 row-span-1" src={h.styling.local} fallback={h.styling.fallback} eager index={1} />
           <BentoTile className="col-span-1 row-span-1" src={h.makeup.local} fallback={h.makeup.fallback} index={2} />
           <BentoTile className="col-span-2 row-span-1" src={h.lounge.local} fallback={h.lounge.fallback} index={3} />
-        </div>
+        </motion.div>
       </div>
 
       {/* ── Service ticker ── */}

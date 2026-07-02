@@ -57,7 +57,7 @@ export default function Showcase() {
         <div className="mt-10 md:mt-12 flex max-md:justify-center">
           <a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium text-sm tracking-wide text-white bg-primary hover:bg-primary-hover transition-all duration-300 active:scale-[0.97]"
+            className="btn-shimmer inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-medium text-sm tracking-wide text-white bg-primary hover:bg-primary-hover transition-all duration-300 active:scale-[0.97]"
           >
             {t.services.cta}
           </a>

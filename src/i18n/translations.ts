@@ -49,6 +49,28 @@ export interface TranslationStrings {
     }>
   }
 
+  // Scroll journey ("a visit at MStyle") section
+  journey: {
+    label: string
+    titlePart1: string
+    titleAccent: string
+    description: string
+    scrollHint: string
+    steps: Array<{ title: string; text: string }>
+  }
+
+  // Before/after comparison section
+  beforeAfter: {
+    label: string
+    titlePart1: string
+    titleAccent: string
+    description: string
+    before: string
+    after: string
+    caption: string
+    sliderAria: string
+  }
+
   // Exclusive shuttle service section
   shuttle: {
     badge: string
@@ -183,6 +205,43 @@ const de: TranslationStrings = {
       { title: 'Gesichtsbehandlungen & Make-up', tag: 'Beauty', alt: 'Professionelles Make-up wird aufgetragen' },
       { title: 'Laser-Haarentfernung', tag: 'Laser', alt: 'Sanfte, dauerhafte Laser-Haarentfernung im Studio' },
     ],
+  },
+
+  journey: {
+    label: 'Das MStyle-Erlebnis',
+    titlePart1: 'Vom Ankommen ',
+    titleAccent: 'bis zum Auftritt',
+    description: 'Scrollen Sie durch einen Besuch bei uns — vier Momente, die den Unterschied machen.',
+    scrollHint: 'Weiterscrollen',
+    steps: [
+      {
+        title: 'Beratung & Pflege',
+        text: 'Wir nehmen uns Zeit, hören zu und bereiten Haar und Haut mit hochwertiger Pflege vor.',
+      },
+      {
+        title: 'Styling',
+        text: 'Föhnen, Locken oder glätten — Ihre Frisur nimmt Form an, mit Präzision und Premium-Produkten.',
+      },
+      {
+        title: 'Feinschliff',
+        text: 'Hochstecken, Wimpern, Make-up: die Details, die aus einem Look Ihren Look machen.',
+      },
+      {
+        title: 'Ihr Auftritt',
+        text: 'Sie verlassen die Lounge bereit für Ihren Moment — auf Wunsch bringt Sie unser Fahrservice direkt hin.',
+      },
+    ],
+  },
+
+  beforeAfter: {
+    label: 'Vorher / Nachher',
+    titlePart1: 'Der Unterschied, ',
+    titleAccent: 'den man sieht',
+    description: 'Ziehen Sie den Regler zur Seite und sehen Sie, was professionelles Styling ausmacht.',
+    before: 'Vorher',
+    after: 'Nachher',
+    caption: 'Beispielhafte Darstellung — echte Ergebnisse laufend auf unserem Instagram.',
+    sliderAria: 'Vorher-Nachher-Vergleich',
   },
 
   shuttle: {
@@ -375,6 +434,43 @@ const en: TranslationStrings = {
     ],
   },
 
+  journey: {
+    label: 'The MStyle Experience',
+    titlePart1: 'From walking in ',
+    titleAccent: 'to turning heads',
+    description: 'Scroll through a visit with us — four moments that make the difference.',
+    scrollHint: 'Keep scrolling',
+    steps: [
+      {
+        title: 'Consultation & Care',
+        text: 'We take our time, listen, and prepare hair and skin with premium care.',
+      },
+      {
+        title: 'Styling',
+        text: 'Blow-dry, curls or sleek — your hairstyle takes shape with precision and premium products.',
+      },
+      {
+        title: 'Finishing Touches',
+        text: 'Up-dos, lashes, make-up: the details that turn a look into your look.',
+      },
+      {
+        title: 'Your Moment',
+        text: 'You leave the lounge ready for your moment — and on request, our shuttle takes you right there.',
+      },
+    ],
+  },
+
+  beforeAfter: {
+    label: 'Before / After',
+    titlePart1: 'A difference ',
+    titleAccent: 'you can see',
+    description: 'Drag the slider and see what professional styling really does.',
+    before: 'Before',
+    after: 'After',
+    caption: 'Illustrative example — real results regularly on our Instagram.',
+    sliderAria: 'Before-after comparison',
+  },
+
   shuttle: {
     badge: 'Exclusive Service',
     titlePart1: 'Your personal ',
@@ -563,6 +659,43 @@ const ar: TranslationStrings = {
       { title: 'العناية بالبشرة والمكياج', tag: 'بشرة', alt: 'وضع مكياج احترافي' },
       { title: 'إزالة الشعر بالليزر', tag: 'ليزر', alt: 'إزالة شعر دائمة ولطيفة بالليزر في الصالون' },
     ],
+  },
+
+  journey: {
+    label: 'تجربة MStyle',
+    titlePart1: 'من لحظة وصولكِ ',
+    titleAccent: 'إلى إطلالتكِ المثالية',
+    description: 'مرّري لتعيشي زيارة في صالوننا — أربع لحظات تصنع الفرق.',
+    scrollHint: 'تابعي التمرير',
+    steps: [
+      {
+        title: 'استشارة وعناية',
+        text: 'نأخذ وقتنا، نستمع إليكِ، ونحضّر الشعر والبشرة بمنتجات عناية فاخرة.',
+      },
+      {
+        title: 'التصفيف',
+        text: 'تجفيف، تمويج أو تنعيم — تسريحتكِ تأخذ شكلها بدقة وبمنتجات مميزة.',
+      },
+      {
+        title: 'اللمسات الأخيرة',
+        text: 'تسريحات مرفوعة، رموش، مكياج: التفاصيل التي تجعل الإطلالة إطلالتكِ.',
+      },
+      {
+        title: 'لحظتكِ',
+        text: 'تغادرين الصالون جاهزة للحظتكِ — وعند الرغبة توصلكِ خدمتنا إلى مناسبتكِ مباشرة.',
+      },
+    ],
+  },
+
+  beforeAfter: {
+    label: 'قبل / بعد',
+    titlePart1: 'فرقٌ ',
+    titleAccent: 'تراه العين',
+    description: 'اسحبي المؤشر لتري ما يصنعه التصفيف الاحترافي.',
+    before: 'قبل',
+    after: 'بعد',
+    caption: 'صورة توضيحية — النتائج الحقيقية تجدينها على إنستغرامنا.',
+    sliderAria: 'مقارنة قبل وبعد',
   },
 
   shuttle: {
