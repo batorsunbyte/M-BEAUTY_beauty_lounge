@@ -1,149 +1,175 @@
-import { useRef } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { SparkleBackground } from '@/components/ui/SparkleBackground'
 import { AuroraBackground } from '@/components/ui/AuroraBackground'
 import RotatingBadge from '@/components/ui/RotatingBadge'
-import BentoTile from '@/components/ui/BentoTile'
-import { heroImages } from '@/lib/images'
+import { heroImages, handleImageError } from '@/lib/images'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
+/* ----------------------------------------------------------------
+   Hero, "curtain" edition: on desktop the whole section pins to the
+   viewport (.hero-curtain, index.css) and the rest of the page
+   scrolls OVER it — the background never moves. While being covered
+   the hero content gently fades/scales back. Two LARGE overlapping
+   image cards sit beside (not below) the statement headline, with
+   the spinning badge on their edge.
+   ---------------------------------------------------------------- */
 export default function Hero() {
   const { t } = useLanguage()
   const h = heroImages
   const reduce = useReducedMotion()
-  const sectionRef = useRef<HTMLElement>(null)
 
-  /* Subtle parallax: the image cluster drifts up slower than the page scrolls. */
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
-  const bentoY = useTransform(scrollYProgress, [0, 1], [0, -70])
+  /* Recede while the curtain (following content) slides over. */
+  const { scrollY } = useScroll()
+  const contentOpacity = useTransform(scrollY, [0, 420, 820], [1, 1, 0.25])
+  const contentScale = useTransform(scrollY, [0, 820], [1, 0.955])
 
-  /* The slogan as three huge lines, each revealed from behind a mask. */
+  /* The slogan as three lines, each revealed from behind a mask. */
   const lines = [t.hero.titlePart1.trim(), t.hero.titleElegance, t.hero.titlePart2.trim()]
 
   return (
     <section
       id="hero"
-      ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="hero-curtain relative z-0 min-h-svh flex flex-col overflow-hidden"
       style={{
         background: 'linear-gradient(165deg, var(--color-hero-bg-1) 0%, var(--color-hero-bg-2) 35%, var(--color-hero-bg-3) 65%, var(--color-hero-bg-1) 100%)',
       }}
     >
-      {/* Living background: drifting rose-gold aurora, gold dust, silk threads + sparkles */}
+      {/* Living background: aurora, gold dust, silk threads, sparkles */}
       <AuroraBackground dust={26} silk />
       <SparkleBackground particleColor="#BD7F6C" speed={2} particleDensity={80} />
 
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 pt-[112px] pb-32">
+      {/* Background substance: giant outlined watermark M + fine rings */}
+      <div aria-hidden="true" className="absolute inset-0 overflow-hidden pointer-events-none">
+        <span className="hero-watermark">M</span>
+        <span className="hero-ring w-[46vw] h-[46vw] max-w-[680px] max-h-[680px]" style={{ top: '8%', insetInlineEnd: '-8%' }} />
+        <span className="hero-ring w-[30vw] h-[30vw] max-w-[440px] max-h-[440px]" style={{ bottom: '-6%', insetInlineStart: '16%' }} />
+      </div>
 
-        {/* ── Statement headline, full width ── */}
-        <motion.span
-          className="inline-block font-body text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-5"
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={reduce ? undefined : { opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.7, ease: EASE }}
-        >
-          {t.hero.eyebrow}
-        </motion.span>
+      <motion.div
+        className="relative z-10 flex-1 flex items-center w-full"
+        style={reduce ? undefined : { opacity: contentOpacity, scale: contentScale }}
+      >
+        <div className="w-full max-w-[1200px] mx-auto px-6 pt-[100px] pb-24 grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-14 items-center">
 
-        <h1
-          className="font-heading font-medium tracking-tight mb-10 md:mb-14"
-          /* min sized so the longest German line ("Selbstbewusstsein.")
-             still fits a 320px viewport without clipping */
-          style={{ fontSize: 'clamp(2rem, 8.2vw, 7rem)', lineHeight: 1.04, color: 'var(--color-text-heading)' }}
-        >
-          {lines.map((line, i) => (
-            <span key={i} className={`block overflow-hidden pb-[0.08em] -mb-[0.08em] ${i === 2 ? 'ps-[9%]' : ''}`}>
-              <motion.span
-                className="block"
-                initial={reduce ? false : { y: '112%' }}
-                animate={reduce ? undefined : { y: '0%' }}
-                transition={{ delay: 0.2 + i * 0.13, duration: 0.95, ease: EASE }}
-              >
-                {i === 1 ? <em className="italic text-primary">{line}</em> : line}
-              </motion.span>
-            </span>
-          ))}
-        </h1>
-
-        {/* ── Below: copy + CTAs left, floating image cluster right ── */}
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-
-          <motion.div
-            className="max-lg:text-center"
-            initial={reduce ? false : { opacity: 0, y: 26 }}
-            animate={reduce ? undefined : { opacity: 1, y: 0 }}
-            transition={{ delay: 0.65, duration: 0.85, ease: EASE }}
-          >
-            <p
-              className="text-lg leading-[1.7] mb-9 max-w-[520px] max-lg:mx-auto"
-              style={{ color: 'var(--color-text-muted)' }}
+          {/* ── Left: statement copy ── */}
+          <div className="max-lg:text-center">
+            <motion.span
+              className="inline-block font-body text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-4"
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              animate={reduce ? undefined : { opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.7, ease: EASE }}
             >
-              {t.hero.description}
-            </p>
+              {t.hero.eyebrow}
+            </motion.span>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-3 mb-10 max-lg:justify-center">
-              <a
-                href="#contact"
-                className="group btn-shimmer inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm tracking-wide text-white bg-primary hover:bg-primary-hover transition-all duration-300 hover:scale-[1.04] active:scale-[0.97]"
-              >
-                {t.hero.ctaPrimary}
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true" />
-              </a>
-              <a
-                href="#showcase"
-                className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm tracking-wide border transition-all duration-300 hover:scale-[1.04] hover:border-primary/50 active:scale-[0.97]"
-                style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-heading)' }}
-              >
-                {t.hero.ctaSecondary}
-              </a>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-5 max-w-md max-lg:mx-auto">
-              {t.hero.stats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  initial={reduce ? false : { opacity: 0, y: 18 }}
-                  animate={reduce ? undefined : { opacity: 1, y: 0 }}
-                  transition={{ delay: 0.85 + i * 0.1, duration: 0.7, ease: EASE }}
-                >
-                  <div className="font-heading text-2xl md:text-3xl font-semibold leading-none" style={{ color: 'var(--color-text-heading)' }}>
-                    {s.value}
-                  </div>
-                  <div className="mt-1.5 text-xs font-medium tracking-[0.03em]" style={{ color: 'var(--color-text-label)' }}>
-                    {s.label}
-                  </div>
-                </motion.div>
+            <h1
+              className="font-heading font-medium tracking-tight mb-7"
+              style={{ fontSize: 'clamp(2rem, 4.5vw, 4rem)', lineHeight: 1.05, color: 'var(--color-text-heading)' }}
+            >
+              {lines.map((line, i) => (
+                <span key={i} className={`block overflow-hidden pb-[0.08em] -mb-[0.08em] ${i === 2 ? 'ps-[9%] max-lg:ps-0' : ''}`}>
+                  <motion.span
+                    className="block"
+                    initial={reduce ? false : { y: '112%' }}
+                    animate={reduce ? undefined : { y: '0%' }}
+                    transition={{ delay: 0.2 + i * 0.13, duration: 0.95, ease: EASE }}
+                  >
+                    {i === 1 ? <em className="italic text-primary">{line}</em> : line}
+                  </motion.span>
+                </span>
               ))}
-            </div>
-          </motion.div>
+            </h1>
 
-          {/* ── Right: bento image cluster (parallax + rotating badge) ── */}
-          <motion.div
-            className="relative grid grid-cols-2 auto-rows-[104px] md:auto-rows-[128px] gap-3 md:gap-4"
-            style={reduce ? undefined : { y: bentoY }}
-          >
-            <BentoTile className="col-span-1 row-span-2" src={h.portrait.local} fallback={h.portrait.fallback} eager index={0} />
-            <BentoTile className="col-span-1 row-span-1" src={h.styling.local} fallback={h.styling.fallback} eager index={1} />
-            <BentoTile className="col-span-1 row-span-1" src={h.makeup.local} fallback={h.makeup.fallback} index={2} />
-            <BentoTile className="col-span-2 row-span-1" src={h.lounge.local} fallback={h.lounge.fallback} index={3} />
-
-            {/* Editorial signature: spinning circular badge overlapping the cluster */}
             <motion.div
-              className="absolute -top-9 -end-4 md:-top-12 md:-end-8 z-20 hidden sm:block"
+              initial={reduce ? false : { opacity: 0, y: 24 }}
+              animate={reduce ? undefined : { opacity: 1, y: 0 }}
+              transition={{ delay: 0.62, duration: 0.85, ease: EASE }}
+            >
+              <p className="text-lg leading-[1.7] mb-8 max-w-[500px] max-lg:mx-auto" style={{ color: 'var(--color-text-muted)' }}>
+                {t.hero.description}
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-3 mb-9 max-lg:justify-center">
+                <a
+                  href="#contact"
+                  className="group btn-shimmer inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-medium text-sm tracking-wide text-white bg-primary hover:bg-primary-hover transition-all duration-300 hover:scale-[1.04] active:scale-[0.97]"
+                >
+                  {t.hero.ctaPrimary}
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true" />
+                </a>
+                <a
+                  href="#showcase"
+                  className="inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm tracking-wide border transition-all duration-300 hover:scale-[1.04] hover:border-primary/50 active:scale-[0.97]"
+                  style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-heading)' }}
+                >
+                  {t.hero.ctaSecondary}
+                </a>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-5 max-w-md max-lg:mx-auto">
+                {t.hero.stats.map((s) => (
+                  <div key={s.label}>
+                    <div className="font-heading text-2xl md:text-3xl font-semibold leading-none" style={{ color: 'var(--color-text-heading)' }}>
+                      {s.value}
+                    </div>
+                    <div className="mt-1.5 text-xs font-medium tracking-[0.03em]" style={{ color: 'var(--color-text-label)' }}>
+                      {s.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+
+          {/* ── Right: two LARGE overlapping image cards + badge ── */}
+          <div className="relative h-[56vh] min-h-[400px] max-h-[640px] max-lg:h-auto max-lg:aspect-[4/5] max-lg:max-w-[440px] max-lg:mx-auto max-lg:w-full">
+
+            {/* Portrait — the dominant card */}
+            <motion.img
+              src={h.portrait.local}
+              onError={handleImageError(h.portrait.fallback)}
+              alt={t.services.items[3]?.alt ?? ''}
+              draggable={false}
+              className="absolute top-0 end-0 w-[74%] h-[86%] object-cover rounded-[26px]"
+              style={{ boxShadow: 'var(--shadow-xl)' }}
+              initial={reduce ? false : { opacity: 0, y: 44, scale: 1.05 }}
+              animate={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 0.45, duration: 1, ease: EASE }}
+            />
+
+            {/* Styling shot — overlaps the portrait from the lower start side */}
+            <motion.img
+              src={h.styling.local}
+              onError={handleImageError(h.styling.fallback)}
+              alt={t.services.items[0]?.alt ?? ''}
+              draggable={false}
+              className="absolute bottom-0 start-0 w-[54%] h-[44%] object-cover rounded-[22px]"
+              style={{
+                boxShadow: 'var(--shadow-lg)',
+                border: '6px solid var(--color-hero-bg-1)',
+              }}
+              initial={reduce ? false : { opacity: 0, y: 44, scale: 1.05 }}
+              animate={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: 0.68, duration: 1, ease: EASE }}
+            />
+
+            {/* Spinning editorial badge on the portrait's edge */}
+            <motion.div
+              className="absolute -top-7 end-[64%] md:-top-9 z-20"
               initial={reduce ? false : { opacity: 0, scale: 0.6, rotate: -30 }}
               animate={reduce ? undefined : { opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ delay: 1.05, duration: 0.9, ease: EASE }}
+              transition={{ delay: 1.0, duration: 0.9, ease: EASE }}
             >
               <RotatingBadge />
             </motion.div>
-          </motion.div>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* ── Service ticker ── */}
       <div

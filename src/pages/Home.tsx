@@ -18,14 +18,26 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Showcase />
-      <MarqueeBand />
-      <JourneySection />
-      <BeforeAfterSection />
-      <ShuttleSection />
-      <TestimonialsDemo />
-      <MarqueeBand reverse />
-      <ContactSection />
+      {/* Curtain: everything below scrolls OVER the pinned hero
+          (overflow:clip keeps the rounded edge without breaking the
+          sticky journey panel inside). */}
+      <div
+        className="relative z-20 rounded-t-[36px]"
+        style={{
+          overflow: 'clip',
+          background: 'var(--color-bg-body)',
+          boxShadow: '0 -28px 56px rgba(64,34,25,0.12)',
+        }}
+      >
+        <Showcase />
+        <MarqueeBand />
+        <JourneySection />
+        <BeforeAfterSection />
+        <ShuttleSection />
+        <TestimonialsDemo />
+        <MarqueeBand reverse />
+        <ContactSection />
+      </div>
     </>
   )
 }
