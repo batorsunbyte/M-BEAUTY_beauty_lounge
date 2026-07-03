@@ -482,9 +482,13 @@
 
 .hero-watermark {
   position: absolute;
-  inset-inline-end: -4%;
+  /* PHYSICAL anchoring on purpose: in RTL a logical inset would flip
+     the M onto the same side as the image collage, which buries it
+     behind the photos — Arabic must look exactly like German here. */
+  right: -4%;
   bottom: -14%;
-  font-family: var(--font-heading);
+  direction: ltr;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
   font-weight: 500;
   font-size: min(78vh, 46vw);
   line-height: 1;

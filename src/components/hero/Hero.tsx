@@ -41,11 +41,13 @@ export default function Hero() {
       <AuroraBackground dust={26} silk />
       <SparkleBackground particleColor="#BD7F6C" speed={2} particleDensity={80} />
 
-      {/* Background substance: giant outlined watermark M + fine rings */}
+      {/* Background substance: giant outlined watermark M + fine rings.
+          Physically anchored (right/left, not start/end) so the backdrop
+          looks IDENTICAL in German and Arabic — see .hero-watermark. */}
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden pointer-events-none">
         <span className="hero-watermark">M</span>
-        <span className="hero-ring w-[46vw] h-[46vw] max-w-[680px] max-h-[680px]" style={{ top: '8%', insetInlineEnd: '-8%' }} />
-        <span className="hero-ring w-[30vw] h-[30vw] max-w-[440px] max-h-[440px]" style={{ bottom: '-6%', insetInlineStart: '16%' }} />
+        <span className="hero-ring w-[46vw] h-[46vw] max-w-[680px] max-h-[680px]" style={{ top: '8%', right: '-8%' }} />
+        <span className="hero-ring w-[30vw] h-[30vw] max-w-[440px] max-h-[440px]" style={{ bottom: '-6%', left: '16%' }} />
       </div>
 
       <motion.div
