@@ -9,13 +9,17 @@ export default function RotatingBadge({ className = '' }: { className?: string }
   return (
     <div
       aria-hidden="true"
+      dir="ltr"
       className={`relative w-28 h-28 md:w-36 md:h-36 rounded-full backdrop-blur-md border shadow-lg ${className}`}
       style={{
         background: 'color-mix(in srgb, var(--color-bg-body) 78%, transparent)',
         borderColor: 'var(--color-border)',
       }}
     >
-      <svg viewBox="0 0 100 100" className="badge-spin absolute inset-0 w-full h-full">
+      {/* direction:ltr forced — in the RTL (Arabic) document the SVG would
+          otherwise lay the Latin text path out right-to-left and the badge
+          reads wrong / appears not to spin like on the German page. */}
+      <svg viewBox="0 0 100 100" className="badge-spin absolute inset-0 w-full h-full" style={{ direction: 'ltr' }}>
         <defs>
           <path id="badge-circle" d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
         </defs>

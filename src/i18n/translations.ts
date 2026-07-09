@@ -12,8 +12,8 @@ export const RTL_LANGUAGES: Language[] = ['ar']
 export interface TranslationStrings {
   // Navbar
   nav: {
-    home: string
     services: string
+    vip: string
     contact: string
     gallery: string
     toggleMenu: string
@@ -79,6 +79,18 @@ export interface TranslationStrings {
     description: string
     note: string
     cta: string
+  }
+
+  // VIP & occasions page (/vip)
+  vip: {
+    label: string
+    titlePart1: string
+    titleAccent: string
+    intro: string
+    items: Array<{ title: string; text: string }>
+    note: string
+    cta: string
+    ctaCall: string
   }
 
   // Contact section
@@ -154,8 +166,8 @@ export interface TranslationStrings {
 
 const de: TranslationStrings = {
   nav: {
-    home: 'Startseite',
     services: 'Leistungen',
+    vip: 'VIP-Service',
     contact: 'Kontakt',
     gallery: 'Galerie',
     toggleMenu: 'Menü umschalten',
@@ -251,6 +263,35 @@ const de: TranslationStrings = {
       'Für Hochzeiten, Verlobungen, Partys und besondere Anlässe bieten wir unseren Kundinnen einen Fahrservice von und zur Lounge an — bequem, sicher und stilvoll.',
     note: 'Weil Sie das Beste verdienen.',
     cta: 'Fahrservice anfragen',
+  },
+
+  vip: {
+    label: 'VIP & Anlässe',
+    titlePart1: 'Ihr großer Tag, ',
+    titleAccent: 'rundum perfekt',
+    intro:
+      'Hochzeit, Verlobung oder Feier: MStyle begleitet Sie vom Styling über den Fahrservice bis zur Dekoration — alles aus einer Hand, alles auf Sie abgestimmt.',
+    items: [
+      {
+        title: 'Braut- & Event-Styling',
+        text: 'Hochsteckfrisur, Make-up und Wimpern für Ihren Anlass — für die Braut und auf Wunsch für die ganze Familie.',
+      },
+      {
+        title: 'VIP-Fahrservice',
+        text: 'Wir holen Sie ab und bringen Sie stilvoll zu Ihrem Anlass — bequem, sicher und diskret.',
+      },
+      {
+        title: 'Hochzeits- & Raumdekoration',
+        text: 'Festsaal, Zuhause oder Lokal: Wir dekorieren Ihre Feier — von romantisch bis glamourös, passend zu Ihrem Stil.',
+      },
+      {
+        title: 'Autodekoration',
+        text: 'Ihr Hochzeitsauto, festlich geschmückt — mit Blumen, Bändern und Liebe zum Detail.',
+      },
+    ],
+    note: 'Jeder Anlass ist anders — erzählen Sie uns von Ihrem, wir stellen Ihr persönliches Paket zusammen.',
+    cta: 'VIP-Anfrage per WhatsApp',
+    ctaCall: 'Anrufen',
   },
 
   contact: {
@@ -380,8 +421,8 @@ const de: TranslationStrings = {
 
 const en: TranslationStrings = {
   nav: {
-    home: 'Home',
     services: 'Services',
+    vip: 'VIP Service',
     contact: 'Contact',
     gallery: 'Gallery',
     toggleMenu: 'Toggle menu',
@@ -477,6 +518,35 @@ const en: TranslationStrings = {
       'For weddings, engagements, parties and special occasions we offer our clients a shuttle service to and from the lounge — comfortable, safe and stylish.',
     note: 'Because you deserve the best.',
     cta: 'Request Shuttle Service',
+  },
+
+  vip: {
+    label: 'VIP & Occasions',
+    titlePart1: 'Your big day, ',
+    titleAccent: 'perfect all around',
+    intro:
+      'Wedding, engagement or celebration: MStyle takes care of everything — styling, shuttle service and decoration, all from one hand and all tailored to you.',
+    items: [
+      {
+        title: 'Bridal & Event Styling',
+        text: 'Up-do, make-up and lashes for your occasion — for the bride, and for the whole family on request.',
+      },
+      {
+        title: 'VIP Shuttle Service',
+        text: 'We pick you up and bring you to your occasion in style — comfortable, safe and discreet.',
+      },
+      {
+        title: 'Wedding & Venue Decoration',
+        text: 'Ballroom, home or restaurant: we decorate your celebration — from romantic to glamorous, matching your style.',
+      },
+      {
+        title: 'Car Decoration',
+        text: 'Your wedding car, festively decorated — with flowers, ribbons and an eye for detail.',
+      },
+    ],
+    note: 'Every occasion is different — tell us about yours and we will put together your personal package.',
+    cta: 'VIP request via WhatsApp',
+    ctaCall: 'Call Us',
   },
 
   contact: {
@@ -606,8 +676,8 @@ const en: TranslationStrings = {
 
 const ar: TranslationStrings = {
   nav: {
-    home: 'الرئيسية',
     services: 'خدماتنا',
+    vip: 'خدمات VIP',
     contact: 'اتصلي بنا',
     gallery: 'المعرض',
     toggleMenu: 'فتح/إغلاق القائمة',
@@ -615,7 +685,7 @@ const ar: TranslationStrings = {
   },
 
   hero: {
-    eyebrow: 'بيوتي لاونج في قلب فلوريدسدورف — فيينا',
+    eyebrow: 'Beauty Lounge في قلب فلوريدسدورف — فيينا',
     titlePart1: 'جمالُكِ. ',
     titleElegance: 'ثقتُكِ.',
     titlePart2: ' أنتِ.',
@@ -705,6 +775,35 @@ const ar: TranslationStrings = {
     cta: 'اطلبي خدمة التوصيل',
   },
 
+  vip: {
+    label: 'VIP والمناسبات',
+    titlePart1: 'يومكِ الكبير، ',
+    titleAccent: 'مثالي بكل تفاصيله',
+    intro:
+      'زفاف، خطوبة أو حفلة: MStyle ترافقكِ من التسريحة إلى خدمة التوصيل والديكور — كل شيء من مكان واحد، وكل شيء على ذوقكِ.',
+    items: [
+      {
+        title: 'تجهيز العروس والمناسبات',
+        text: 'تسريحة، مكياج ورموش ليومكِ الكبير — للعروس ولكل العائلة عند الرغبة.',
+      },
+      {
+        title: 'خدمة توصيل VIP',
+        text: 'نقلّكِ ونوصلكِ إلى مناسبتكِ بأناقة — براحة وأمان وخصوصية.',
+      },
+      {
+        title: 'ديكور الأعراس والقاعات',
+        text: 'قاعة، منزل أو مطعم: نزيّن حفلتكِ — من الرومانسي إلى الفخم، حسب ذوقكِ.',
+      },
+      {
+        title: 'تزيين سيارة العرس',
+        text: 'سيارة زفافكِ مزيّنة باحتفالية — ورود وشرائط وعناية بأدق التفاصيل.',
+      },
+    ],
+    note: 'كل مناسبة مختلفة — احكي لنا عن مناسبتكِ ونجهّز لكِ باقتكِ الخاصة.',
+    cta: 'طلب VIP عبر واتساب',
+    ctaCall: 'اتصلي بنا',
+  },
+
   contact: {
     badge: 'زورينا في الصالون',
     titlePart1: 'لنبتكر معاً ',
@@ -745,7 +844,7 @@ const ar: TranslationStrings = {
     cityCountry: 'Floridsdorfer Markt 9, 1210 Wien',
     rights: 'جميع الحقوق محفوظة.',
     designedInVienna: 'صُمم بعناية في فيينا',
-    tags: ['للسيدات', 'تجميل', 'لاونج'],
+    tags: ['للسيدات', 'Beauty', 'Lounge'],
     impressum: 'بيانات الناشر',
     datenschutz: 'سياسة الخصوصية',
     backToHome: 'العودة إلى الصفحة الرئيسية',

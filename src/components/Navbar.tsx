@@ -3,10 +3,13 @@ import { Link, useLocation } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
 import { LANGUAGES } from '../i18n/translations'
 
-const NAV_HREFS = [
-  { href: '#hero', key: 'home' as const },
-  { href: '#showcase', key: 'services' as const },
-  { href: '#contact', key: 'contact' as const },
+/* Simple menu: Services (home anchor) · VIP page · Gallery page · Contact
+   (home anchor). No "home" tab — the logo already leads home. */
+const NAV_LINKS = [
+  { kind: 'anchor' as const, href: '#showcase', key: 'services' as const },
+  { kind: 'route' as const, to: '/vip', key: 'vip' as const },
+  { kind: 'route' as const, to: '/gallery', key: 'gallery' as const },
+  { kind: 'anchor' as const, href: '#contact', key: 'contact' as const },
 ]
 
 /* Light-theme ink colors (site runs permanently in the light look) */
@@ -125,11 +128,11 @@ export default function Navbar() {
 
         {/* Desktop links — right side */}
         <div className="hidden md:flex items-center gap-10">
-          {NAV_HREFS.map((link) => (
+          {NAV_LINKS.map((link) => (
             <Link
-              key={link.href}
-              to="/"
-              onClick={() => handleHomeAnchor(link.href)}
+              key={link.key}
+              to={link.kind === 'route' ? link.to : '/'}
+              onClick={() => (link.kind === 'anchor' ? handleHomeAnchor(link.href) : closeMenu())}
               className="relative text-[0.8125rem] font-medium tracking-[0.06em] uppercase cursor-pointer
                          transition-colors duration-200 hover:text-primary
                          after:content-[''] after:absolute after:start-0 after:-bottom-[2px]
@@ -141,18 +144,6 @@ export default function Navbar() {
               {t.nav[link.key]}
             </Link>
           ))}
-          <Link
-            to="/gallery"
-            className="relative text-[0.8125rem] font-medium tracking-[0.06em] uppercase cursor-pointer
-                       transition-colors duration-200 hover:text-primary
-                       after:content-[''] after:absolute after:start-0 after:-bottom-[2px]
-                       after:h-[2px] after:w-0 after:bg-primary after:rounded-full
-                       after:transition-[width] after:duration-300
-                       hover:after:w-full"
-            style={{ color: INK_NAV, transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)', fontFamily: 'var(--font-nav)' }}
-          >
-            {t.nav.gallery}
-          </Link>
 
           {/* Language switcher */}
           <LangSwitcher />
@@ -206,11 +197,11 @@ export default function Navbar() {
           transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        {NAV_HREFS.map((link, i) => (
+        {NAV_LINKS.map((link, i) => (
           <Link
-            key={link.href}
-            to="/"
-            onClick={() => handleHomeAnchor(link.href)}
+            key={link.key}
+            to={link.kind === 'route' ? link.to : '/'}
+            onClick={() => (link.kind === 'anchor' ? handleHomeAnchor(link.href) : closeMenu())}
             className="text-[1.875rem] font-medium cursor-pointer
                        transition-all duration-300 hover:text-primary hover:tracking-[0.04em]"
             style={{
@@ -225,22 +216,6 @@ export default function Navbar() {
             {t.nav[link.key]}
           </Link>
         ))}
-        <Link
-          to="/gallery"
-          onClick={closeMenu}
-          className="text-[1.875rem] font-medium cursor-pointer
-                     transition-all duration-300 hover:text-primary hover:tracking-[0.04em]"
-          style={{
-            fontFamily: 'var(--font-nav)',
-            color: INK_HEADING,
-            transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-            opacity: menuOpen ? 1 : 0,
-            transform: menuOpen ? 'translateY(0)' : 'translateY(12px)',
-            transitionDelay: menuOpen ? `${NAV_HREFS.length * 80}ms` : '0ms',
-          }}
-        >
-          {t.nav.gallery}
-        </Link>
       </div>
     </nav>
   )

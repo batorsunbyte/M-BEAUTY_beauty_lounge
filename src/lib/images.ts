@@ -122,6 +122,14 @@ export const journeyImages = [
   { local: asset('images/journey/step-4.jpg'), fallback: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=900&h=1100&fit=crop&q=80' }, // big-night reveal
 ] as const
 
+// --- VIP & occasions page (order = t.vip.items) ---
+export const vipImages = [
+  { local: asset('images/vip/vip-1-styling.jpg'), fallback: 'https://images.unsplash.com/photo-1582095133179-bfd08e2fc6b3?w=900&h=700&fit=crop&q=80' },   // bridal up-do
+  { local: asset('images/vip/vip-2-fahrservice.jpg'), fallback: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=900&h=700&fit=crop&q=80' }, // arriving in style
+  { local: asset('images/vip/vip-3-dekoration.jpg'), fallback: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=900&h=700&fit=crop&q=80' },  // decorated ballroom
+  { local: asset('images/vip/vip-4-auto.jpg'), fallback: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=900&h=700&fit=crop&q=80' },       // flowers & rings detail (TODO: real car-deco photo)
+] as const
+
 // --- Before/after comparison (one portrait; "before" is graded via CSS filter) ---
 export const beforeAfterImage = {
   local: asset('images/before-after/result.jpg'),

@@ -9,6 +9,7 @@ import { LanguageProvider } from './i18n/LanguageContext'
    while the gallery and legal pages load on demand — keeping the
    initial bundle small for a fast first paint. */
 const Gallery = lazy(() => import('./pages/Gallery'))
+const VipService = lazy(() => import('./pages/VipService'))
 const Impressum = lazy(() => import('./pages/Impressum'))
 const Datenschutz = lazy(() => import('./pages/Datenschutz'))
 
@@ -31,6 +32,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/vip" element={<VipService />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
           </Routes>

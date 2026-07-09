@@ -23,16 +23,18 @@ interface FooterSection {
 
 function useFooterLinks(): FooterSection[] {
     const { t } = useLanguage();
+    /* NOTE: internal links use hash-router hrefs (#/...) — plain paths
+       like /gallery would 404 on GitHub Pages. */
     return [
         {
             label: t.footer.services,
-            links: t.footer.serviceLinks.map((title) => ({ title, href: '/#showcase' })),
+            links: t.footer.serviceLinks.map((title) => ({ title, href: '#/' })),
         },
         {
             label: t.footer.studio,
             links: [
-                { title: t.footer.gallery, href: '/gallery' },
-                { title: t.footer.contact, href: '/#contact' },
+                { title: t.nav.vip, href: '#/vip' },
+                { title: t.footer.gallery, href: '#/gallery' },
                 { title: t.footer.booking, href: BUSINESS.whatsappUrl, external: true },
                 { title: t.contact.instagram, href: BUSINESS.instagramUrl, external: true },
             ],

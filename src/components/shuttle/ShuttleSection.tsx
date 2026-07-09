@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Car, Gem, ShieldCheck, Clock3 } from 'lucide-react'
+import { Car, Gem, ShieldCheck, Clock3, ArrowRight } from 'lucide-react'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { useTheme } from '@/hooks/useTheme'
 import { BUSINESS } from '@/lib/business'
@@ -72,7 +73,7 @@ export default function ShuttleSection() {
             </div>
 
             {/* CTA */}
-            <div className="shrink-0 max-lg:mx-auto">
+            <div className="shrink-0 max-lg:mx-auto flex flex-col items-center gap-3">
               <a
                 href={BUSINESS.whatsappUrl}
                 target="_blank"
@@ -82,6 +83,13 @@ export default function ShuttleSection() {
                 <Car className="w-4 h-4" aria-hidden="true" />
                 {t.shuttle.cta}
               </a>
+              <Link
+                to="/vip"
+                className="group inline-flex items-center gap-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-white/85 hover:text-white transition-colors"
+              >
+                {t.vip.label}
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" aria-hidden="true" />
+              </Link>
             </div>
           </div>
 
