@@ -6,6 +6,7 @@ import { getLegalDoc } from '../../i18n/legal'
 import { usePageMeta } from '../../hooks/usePageMeta'
 import { useTheme } from '@/hooks/useTheme'
 import { BUSINESS } from '@/lib/business'
+import PageBackdrop from '@/components/ui/PageBackdrop'
 
 const PLACEHOLDER_SPLIT_RE = /(\[(?:PLATZHALTER|PLACEHOLDER)[^\]]*\])/g
 const isPlaceholder = (s: string) => /^\[(?:PLATZHALTER|PLACEHOLDER)[^\]]*\]$/.test(s)
@@ -48,15 +49,9 @@ export default function LegalPage({ kind }: { kind: 'impressum' | 'datenschutz' 
   const mutedColor = 'var(--color-text-muted)'
 
   return (
-    <main
-      className="relative min-h-screen pt-[72px]"
-      style={{
-        background: isDark
-          ? 'linear-gradient(180deg, #141010 0%, #1d1413 100%)'
-          : 'linear-gradient(180deg, #FAF3EF 0%, #F7EAE4 100%)',
-      }}
-    >
-      <div className="max-w-3xl mx-auto px-6 py-16 md:py-24">
+    <main className="relative min-h-screen pt-[72px]">
+      <PageBackdrop dust={10} />
+      <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 md:py-24">
         {/* Back link */}
         <Link
           to="/"

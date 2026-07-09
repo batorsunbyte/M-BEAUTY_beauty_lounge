@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Phone } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
-import { AuroraBackground } from '@/components/ui/AuroraBackground'
+import PageBackdrop from '@/components/ui/PageBackdrop'
 import { vipImages, handleImageError } from '@/lib/images'
 import { useLanguage } from '../i18n/LanguageContext'
 import { usePageMeta } from '../hooks/usePageMeta'
@@ -26,8 +26,8 @@ export default function VipService() {
   })
 
   return (
-    <main className="relative min-h-screen pt-[72px] overflow-hidden" style={{ background: 'var(--color-bg-body)' }}>
-      <AuroraBackground dust={14} />
+    <main className="relative min-h-screen pt-[72px]">
+      <PageBackdrop />
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 py-14 md:py-20">
         <SectionHeader
