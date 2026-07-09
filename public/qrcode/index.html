@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MStyle Beauty Lounge — Kontakt</title>
+  <meta name="description" content="MStyle Beauty Lounge, Floridsdorfer Markt 9, 1210 Wien — Termin, Instagram, Route und Kontakt speichern." />
+  <!-- Digitale Visitenkarte (QR-Code-Ziel) — soll nicht in Suchmaschinen auftauchen -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#bd7f6c" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23161011'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-size='62' fill='%23d9a08f' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #bd7f6c;
+      --primary-hover: #9c5f4e;
+      --rose-light: #d9a08f;
+      --ink: #1F1310;
+      --ink-body: #3D2B26;
+      --muted: #7A6259;
+      --label: #9A837B;
+      --bg: #FAF3EF;
+      --card: rgba(255, 255, 255, 0.72);
+      --border: rgba(189, 127, 108, 0.16);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--ink-body);
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 18px 34px;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Aurora background (matches the website) ── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 {
+      width: 70vw; height: 70vw; max-width: 460px; max-height: 460px;
+      top: -12%; left: -18%;
+      background: radial-gradient(circle at 42% 42%, rgba(217,160,143,0.4), transparent 65%);
+      animation: drift1 18s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 60vw; height: 60vw; max-width: 400px; max-height: 400px;
+      bottom: -14%; right: -14%;
+      background: radial-gradient(circle at 55% 45%, rgba(189,127,108,0.32), transparent 65%);
+      animation: drift2 23s ease-in-out infinite;
+    }
+    @keyframes drift1 {
+      0%, 100% { transform: translate3d(-6%, -4%, 0) scale(1); }
+      50%      { transform: translate3d(10%, 8%, 0) scale(1.2); }
+    }
+    @keyframes drift2 {
+      0%, 100% { transform: translate3d(6%, 6%, 0) scale(1.1); }
+      50%      { transform: translate3d(-9%, -7%, 0) scale(0.92); }
+    }
+    .ring {
+      position: fixed;
+      border: 1px solid rgba(189,127,108,0.16);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none; }
+    }
+
+    /* ── Card ── */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      box-shadow: 0 16px 48px rgba(64,34,25,0.12), 0 2px 8px rgba(64,34,25,0.05);
+      padding: 34px 22px 26px;
+      text-align: center;
+    }
+
+    /* ── Brand ── */
+    .monogram {
+      width: 84px; height: 84px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(189,127,108,0.45);
+      background: rgba(217,160,143,0.10);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 44px; font-weight: 500;
+      color: var(--primary);
+    }
+    .brand {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2.3rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .brand .accent { color: var(--primary); }
+    .brand-sub {
+      margin-top: 8px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.34em;
+      text-indent: 0.34em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+    .slogan {
+      margin: 14px 0 20px;
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-size: 1.02rem;
+      color: var(--muted);
+    }
+    .slogan .accent { color: var(--primary); }
+
+    /* ── Service chips ── */
+    .chips {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 7px;
+      margin-bottom: 24px;
+    }
+    .chip {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary-hover);
+      border: 1px solid rgba(189,127,108,0.35);
+      border-radius: 999px;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.5);
+    }
+
+    /* ── Contact rows ── */
+    .rows { display: flex; flex-direction: column; gap: 10px; text-align: left; }
+    .row {
+      display: flex; align-items: center; gap: 13px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(189,127,108,0.14);
+      border-radius: 17px;
+      padding: 13px 15px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 4px rgba(64,34,25,0.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .row:active { transform: scale(0.985); }
+    @media (hover: hover) {
+      .row:hover {
+        transform: translateY(-1.5px);
+        border-color: rgba(189,127,108,0.35);
+        box-shadow: 0 6px 18px rgba(156,95,78,0.14);
+      }
+    }
+    .row .icon {
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(189,127,108,0.13);
+      color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .row .icon svg { width: 17px; height: 17px; }
+    .row .label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-bottom: 2px;
+    }
+    .row .value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      word-break: break-word;
+    }
+
+    /* ── Save contact button ── */
+    .save {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      margin-top: 18px;
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 999px;
+      background: linear-gradient(120deg, #bd7f6c, #d9a08f 60%, #bd7f6c);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(156,95,78,0.32);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .save:active { transform: scale(0.98); }
+    @media (hover: hover) {
+      .save:hover { transform: translateY(-1.5px); box-shadow: 0 12px 28px rgba(156,95,78,0.4); }
+    }
+    .save svg { width: 17px; height: 17px; }
+
+    .website-link {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .website-link:hover { color: var(--primary); }
+
+    /* ── Footer ── */
+    .foot {
+      position: relative; z-index: 1;
+      margin-top: 22px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--label);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+  <div class="ring" style="width:78vw;height:78vw;max-width:520px;max-height:520px;top:-14%;right:-22%;" aria-hidden="true"></div>
+  <div class="ring" style="width:52vw;height:52vw;max-width:340px;max-height:340px;bottom:-10%;left:-14%;" aria-hidden="true"></div>
+
+  <main class="card">
+    <div class="monogram" aria-hidden="true">M</div>
+    <h1 class="brand">M<span class="accent">Style</span></h1>
+    <div class="brand-sub">Beauty Lounge</div>
+    <p class="slogan">Schönheit. <span class="accent">Selbstbewusstsein.</span> Du.</p>
+
+    <div class="chips" aria-label="Leistungen">
+      <span class="chip">Frisuren</span>
+      <span class="chip">Nagelpflege</span>
+      <span class="chip">Wimpern</span>
+      <span class="chip">Make-up</span>
+      <span class="chip">Laser</span>
+    </div>
+
+    <div class="rows">
+      <a class="row" href="tel:+4368181135700">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </span>
+        <span>
+          <span class="label">Anrufen &amp; Termin</span><br>
+          <span class="value">+43 681 8113 5700</span>
+        </span>
+      </a>
+
+      <a class="row" href="https://www.instagram.com/mstylesalon/" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        </span>
+        <span>
+          <span class="label">Instagram</span><br>
+          <span class="value">@MStylesalon</span>
+        </span>
+      </a>
+
+      <a class="row" href="https://mstyle.beauty">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </span>
+        <span>
+          <span class="label">Website</span><br>
+          <span class="value">mstyle.beauty</span>
+        </span>
+      </a>
+
+      <a class="row" href="mailto:Mstyle@unlmtd.at">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </span>
+        <span>
+          <span class="label">E-Mail</span><br>
+          <span class="value">Mstyle@unlmtd.at</span>
+        </span>
+      </a>
+
+      <a class="row" href="https://maps.google.com/?q=Floridsdorfer+Markt+9,+1210+Wien" target="_blank" rel="noopener noreferrer">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </span>
+        <span>
+          <span class="label">Adresse &amp; Route</span><br>
+          <span class="value">Floridsdorfer Markt 9, 1210 Wien</span>
+        </span>
+      </a>
+    </div>
+
+    <a class="save" href="mstyle.vcf" download="MStyle-Beauty-Lounge.vcf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 21a8 8 0 0 1 13.29-6"/><circle cx="10" cy="8" r="5"/><path d="M19 16v6"/><path d="M22 19h-6"/></svg>
+      Kontakt speichern
+    </a>
+
+    <a class="website-link" href="https://mstyle.beauty">→ zur Website</a>
+  </main>
+
+  <div class="foot">MStyle &nbsp;·&nbsp; Beauty Lounge &nbsp;·&nbsp; Wien</div>
+</body>
+</html>
