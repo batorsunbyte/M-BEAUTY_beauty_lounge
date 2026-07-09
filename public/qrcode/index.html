@@ -45,49 +45,33 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Aurora background (matches the website) ── */
-    .orb {
+    /* ── Background: the LIVE homepage behind the card (modal look).
+          The iframe is purely decorative — no interaction, no focus.
+          A soft scrim dims/blurs it so the card stays in focus. ── */
+    .site-bg {
       position: fixed;
-      border-radius: 50%;
-      filter: blur(70px);
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      border: 0;
       pointer-events: none;
       z-index: 0;
+      background: var(--bg);
     }
-    .orb-1 {
-      width: 70vw; height: 70vw; max-width: 460px; max-height: 460px;
-      top: -12%; left: -18%;
-      background: radial-gradient(circle at 42% 42%, rgba(217,160,143,0.4), transparent 65%);
-      animation: drift1 18s ease-in-out infinite;
-    }
-    .orb-2 {
-      width: 60vw; height: 60vw; max-width: 400px; max-height: 400px;
-      bottom: -14%; right: -14%;
-      background: radial-gradient(circle at 55% 45%, rgba(189,127,108,0.32), transparent 65%);
-      animation: drift2 23s ease-in-out infinite;
-    }
-    @keyframes drift1 {
-      0%, 100% { transform: translate3d(-6%, -4%, 0) scale(1); }
-      50%      { transform: translate3d(10%, 8%, 0) scale(1.2); }
-    }
-    @keyframes drift2 {
-      0%, 100% { transform: translate3d(6%, 6%, 0) scale(1.1); }
-      50%      { transform: translate3d(-9%, -7%, 0) scale(0.92); }
-    }
-    .ring {
+    .scrim {
       position: fixed;
-      border: 1px solid rgba(189,127,108,0.16);
-      border-radius: 50%;
+      inset: 0;
+      background: rgba(43, 24, 18, 0.30);
+      backdrop-filter: blur(2.5px);
+      -webkit-backdrop-filter: blur(2.5px);
       pointer-events: none;
-      z-index: 0;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .orb { animation: none; }
+      z-index: 1;
     }
 
     /* ── Card ── */
     .card {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: 100%;
       max-width: 420px;
       background: var(--card);
@@ -225,7 +209,9 @@
 
     /* ── Footer ── */
     .foot {
-      position: relative; z-index: 1;
+      position: relative; z-index: 2;
+      color: rgba(255, 244, 238, 0.85);
+      text-shadow: 0 1px 8px rgba(43,24,18,0.4);
       margin-top: 22px;
       font-size: 0.6rem;
       font-weight: 700;
@@ -237,10 +223,8 @@
   </style>
 </head>
 <body>
-  <div class="orb orb-1" aria-hidden="true"></div>
-  <div class="orb orb-2" aria-hidden="true"></div>
-  <div class="ring" style="width:78vw;height:78vw;max-width:520px;max-height:520px;top:-14%;right:-22%;" aria-hidden="true"></div>
-  <div class="ring" style="width:52vw;height:52vw;max-width:340px;max-height:340px;bottom:-10%;left:-14%;" aria-hidden="true"></div>
+  <iframe class="site-bg" src="../" title="" aria-hidden="true" tabindex="-1" loading="lazy" scrolling="no"></iframe>
+  <div class="scrim" aria-hidden="true"></div>
 
   <main class="card">
     <h1 class="sr-only">MStyle Beauty Lounge</h1>
