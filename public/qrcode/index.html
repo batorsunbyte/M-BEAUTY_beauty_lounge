@@ -67,6 +67,14 @@
       pointer-events: none;
       z-index: 1;
     }
+    /* Clicking the dimmed area around the card leads to the website —
+       classic modal behaviour (the card itself sits above this layer). */
+    .backdrop-link {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      cursor: pointer;
+    }
 
     /* ── Card ── */
     .card {
@@ -225,6 +233,7 @@
 <body>
   <iframe class="site-bg" src="../" title="" aria-hidden="true" tabindex="-1" loading="lazy" scrolling="no"></iframe>
   <div class="scrim" aria-hidden="true"></div>
+  <a class="backdrop-link" href="../" aria-label="Zur Website — mstyle.beauty"></a>
 
   <main class="card">
     <h1 class="sr-only">MStyle Beauty Lounge</h1>
