@@ -29,6 +29,7 @@ Stand: 2026-07-02 · Alle Punkte prüfen, bevor die Seite öffentlich beworben w
 
 ## 3. Echte Inhalte
 
+- [ ] **Echte Fotos der Autodekoration + Raumdeko** vom Kunden (VIP-Seite nutzt bei der Autodeko aktuell ein Symbolbild) → `public/images/vip/vip-1..4.jpg`
 - [ ] **Echte Lounge-Fotos** einlegen unter `public/images/` (Namen siehe `src/lib/images.ts`):
   - `hero/hero-1..4.jpg` · `services/service-1..5-*.jpg` · `gallery/work-1..8.jpg`
   - Vorher komprimieren (max. 1600px, siehe Workflow: Größen-Check vor Commit)
