@@ -144,12 +144,15 @@ export default function JourneySection() {
   const { t, isRTL } = useLanguage()
   const reduce = useReducedMotion()
   /* On very short viewports (landscape phones) the sticky panel cannot
-     fit header + image + text + rail — fall back to the static layout. */
+     fit header + image + text + rail — fall back to the static layout.
+     On phones (<768px) the scroll-scrubbed 400vh pin janks and makes the
+     page feel endless, so they get the static layout too. */
   const isShort = useMediaQuery('(max-height: 560px)')
+  const isPhone = useMediaQuery('(max-width: 767px)')
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
 
-  if (reduce || isShort) return <StaticJourney />
+  if (reduce || isShort || isPhone) return <StaticJourney />
 
   return (
     <section id="journey" ref={ref} className="relative" style={{ height: `${STEPS * 100}vh` }}>

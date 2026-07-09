@@ -108,18 +108,27 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 h-[72px] z-[100] transition-[background-color,backdrop-filter,box-shadow] duration-300"
-      style={{
-        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        backgroundColor: scrolled ? 'var(--color-bg-overlay)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
-        boxShadow: scrolled
-          ? '0 1px 3px rgba(64,34,25,0.04), 0 4px 16px rgba(64,34,25,0.06)'
-          : 'none',
-      }}
+      className="fixed top-0 left-0 right-0 h-[72px] z-[100]"
       aria-label="Main navigation"
     >
+      {/* Bar background as its own child: backdrop-filter on <nav> itself
+          would turn the nav into the containing block for the fixed mobile
+          overlay below — the menu would then be pinned to the 72px bar
+          instead of covering the viewport once the page is scrolled. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 transition-[background-color,backdrop-filter,box-shadow] duration-300"
+        style={{
+          transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          backgroundColor: scrolled ? 'var(--color-bg-overlay)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
+          boxShadow: scrolled
+            ? '0 1px 3px rgba(64,34,25,0.04), 0 4px 16px rgba(64,34,25,0.06)'
+            : 'none',
+        }}
+      />
+
       {/* ── Inner container ──────────────────────────────── */}
       <div className="w-full max-w-[1200px] mx-auto px-6 flex items-center justify-between h-full">
 

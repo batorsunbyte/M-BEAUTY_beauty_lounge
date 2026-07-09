@@ -136,6 +136,8 @@ export default function Hero() {
               src={h.portrait.local}
               onError={handleImageError(h.portrait.fallback)}
               alt={t.services.items[3]?.alt ?? ''}
+              fetchPriority="high"
+              decoding="async"
               draggable={false}
               className="absolute top-0 end-0 w-[74%] h-[86%] object-cover rounded-[26px]"
               style={{ boxShadow: 'var(--shadow-xl)' }}
