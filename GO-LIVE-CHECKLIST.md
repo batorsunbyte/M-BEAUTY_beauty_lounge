@@ -21,10 +21,10 @@ Stand: 2026-07-02 · Alle Punkte prüfen, bevor die Seite öffentlich beworben w
 - [x] Alle URLs im Code auf https://mstyle.beauty umgestellt (index.html, business.ts, robots.txt, sitemap.xml, legal.json)
 - [x] Deploy-Workflow: `.github/workflows/deploy.yml` — jeder Push/Merge auf main baut + deployt automatisch
 - [x] `public/CNAME` = mstyle.beauty
-- [ ] **Repo auf public stellen** (GitHub Free erlaubt Pages nur für öffentliche Repos): `gh repo edit batorsunbyte/M-BEAUTY_beauty_lounge --visibility public --accept-visibility-change-consequences`
-- [ ] GitHub Pages aktivieren (nach public): `gh api repos/batorsunbyte/M-BEAUTY_beauty_lounge/pages -X POST -f build_type=workflow` + Domain: `gh api repos/batorsunbyte/M-BEAUTY_beauty_lounge/pages -X PUT -f cname=mstyle.beauty`
-- [ ] GoDaddy-DNS: 4× A-Record @ → 185.199.108.153 / 185.199.109.153 / 185.199.110.153 / 185.199.111.153; CNAME www → batorsunbyte.github.io
-- [ ] Nach DNS-Propagation: „Enforce HTTPS" in Repo → Settings → Pages anhaken
+- [x] **Repo auf public gestellt** (2026-07-08, manuell durch Zakir)
+- [x] GitHub Pages aktiviert (build_type=workflow) + Custom Domain mstyle.beauty gesetzt
+- [x] GoDaddy-DNS: 4× A-Record @ → 185.199.108–111.153; CNAME www → batorsunbyte.github.io
+- [x] **HTTPS live + erzwungen** (2026-07-09): Zertifikat ausgestellt, `https_enforced=true`, http→https 301-Redirect verifiziert (Hinweis: Zertifikat hing anfangs wegen GitHub-Pages-Störung; Fix = Domain via API entfernen + neu setzen)
 - [ ] `og-image.jpg` nach Deploy testen: WhatsApp/Instagram-Link-Vorschau prüfen
 
 ## 3. Echte Inhalte
