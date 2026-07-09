@@ -17,9 +17,14 @@ Stand: 2026-07-02 · Alle Punkte prüfen, bevor die Seite öffentlich beworben w
 
 ## 2. Domain & Deployment
 
-- [ ] Echte Domain registrieren (z. B. mstyle-beauty.at) — bis dahin läuft alles auf GitHub Pages URL
-- [ ] Nach Domain-Kauf ersetzen in: `index.html` (canonical, hreflang, og:url, JSON-LD), `src/lib/business.ts` (`siteUrl`), `public/robots.txt`, `public/sitemap.xml`
-- [ ] GitHub Pages aktivieren (Settings → Pages → Deploy from branch bzw. Actions-Workflow)
+- [x] Domain registriert: **mstyle.beauty** (GoDaddy, 2026-07-06)
+- [x] Alle URLs im Code auf https://mstyle.beauty umgestellt (index.html, business.ts, robots.txt, sitemap.xml, legal.json)
+- [x] Deploy-Workflow: `.github/workflows/deploy.yml` — jeder Push/Merge auf main baut + deployt automatisch
+- [x] `public/CNAME` = mstyle.beauty
+- [ ] **Repo auf public stellen** (GitHub Free erlaubt Pages nur für öffentliche Repos): `gh repo edit batorsunbyte/M-BEAUTY_beauty_lounge --visibility public --accept-visibility-change-consequences`
+- [ ] GitHub Pages aktivieren (nach public): `gh api repos/batorsunbyte/M-BEAUTY_beauty_lounge/pages -X POST -f build_type=workflow` + Domain: `gh api repos/batorsunbyte/M-BEAUTY_beauty_lounge/pages -X PUT -f cname=mstyle.beauty`
+- [ ] GoDaddy-DNS: 4× A-Record @ → 185.199.108.153 / 185.199.109.153 / 185.199.110.153 / 185.199.111.153; CNAME www → batorsunbyte.github.io
+- [ ] Nach DNS-Propagation: „Enforce HTTPS" in Repo → Settings → Pages anhaken
 - [ ] `og-image.jpg` nach Deploy testen: WhatsApp/Instagram-Link-Vorschau prüfen
 
 ## 3. Echte Inhalte

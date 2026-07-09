@@ -1,4 +1,4 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 
-Sitemap: https://batorsunbyte.github.io/M-BEAUTY_beauty_lounge/sitemap.xml
+Sitemap: https://mstyle.beauty/sitemap.xml

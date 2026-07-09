@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Single source of truth for MStyle Beauty Lounge contact & business data.
  * Update HERE and everything (contact section, footer, legal pages) follows.
  */
@@ -23,5 +23,5 @@ export const BUSINESS = {
   mapsEmbed: 'https://www.google.com/maps?q=Floridsdorfer+Markt+9,+1210+Wien&output=embed',
 
   /** TODO: replace with the real domain once registered (see GO-LIVE-CHECKLIST.md). */
-  siteUrl: 'https://batorsunbyte.github.io/M-BEAUTY_beauty_lounge/',
+  siteUrl: 'https://mstyle.beauty/',
 } as const
