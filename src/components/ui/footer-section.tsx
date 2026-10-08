@@ -197,6 +197,10 @@ export function Footer() {
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <p className="text-xs tracking-wide" style={{ color: isDark ? '#736a65' : '#9A837B' }}>
                             {t.footer.designedInVienna}
+                            {/* SunByte-Zeile seit 08.10.2026 auf allen SunByte-Seiten (Zakir) */}
+                            <a href="https://sunbyte.at" target="_blank" rel="noopener noreferrer" className="block mt-1 hover:underline" style={{ color: 'inherit' }}>
+                                {t.footer.credit}
+                            </a>
                         </p>
 
                         {/* Legal links — required in Austria */}

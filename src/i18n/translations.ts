@@ -128,6 +128,7 @@ export interface TranslationStrings {
     cityCountry: string
     rights: string
     designedInVienna: string
+    credit: string
     tags: string[]
     impressum: string
     datenschutz: string
@@ -334,6 +335,7 @@ const de: TranslationStrings = {
     cityCountry: 'Floridsdorfer Markt 9, 1210 Wien',
     rights: 'Alle Rechte vorbehalten.',
     designedInVienna: 'Mit Sorgfalt in Wien gestaltet',
+    credit: 'Website gebaut und betreut von SunByte, Wien.',
     tags: ['Damen', 'Beauty', 'Lounge'],
     impressum: 'Impressum',
     datenschutz: 'Datenschutz',
@@ -589,6 +591,7 @@ const en: TranslationStrings = {
     cityCountry: 'Floridsdorfer Markt 9, 1210 Vienna',
     rights: 'All rights reserved.',
     designedInVienna: 'Designed with care in Vienna',
+    credit: 'Website built and maintained by SunByte, Vienna.',
     tags: ['Ladies', 'Beauty', 'Lounge'],
     impressum: 'Imprint',
     datenschutz: 'Privacy Policy',
@@ -844,6 +847,7 @@ const ar: TranslationStrings = {
     cityCountry: 'Floridsdorfer Markt 9, 1210 Wien',
     rights: 'جميع الحقوق محفوظة.',
     designedInVienna: 'صُمم بعناية في فيينا',
+    credit: 'الموقع من تصميم ورعاية SunByte، فيينا.',
     tags: ['للسيدات', 'Beauty', 'Lounge'],
     impressum: 'بيانات الناشر',
     datenschutz: 'سياسة الخصوصية',
