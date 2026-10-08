@@ -61,7 +61,7 @@ function SunByteBadge({ isDark }: { isDark: boolean }) {
     return (
         <div className="flex justify-center pt-2">
             <a
-                href="https://sunbyte.at"
+                href="https://sunbyte.at/arbeiten/#mstyle"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]"
@@ -198,7 +198,7 @@ export function Footer() {
                         <p className="text-xs tracking-wide" style={{ color: isDark ? '#736a65' : '#9A837B' }}>
                             {t.footer.designedInVienna}
                             {/* SunByte-Zeile seit 08.10.2026 auf allen SunByte-Seiten (Zakir) */}
-                            <a href="https://sunbyte.at" target="_blank" rel="noopener noreferrer" className="block mt-1 hover:underline" style={{ color: 'inherit' }}>
+                            <a href="https://sunbyte.at/arbeiten/#mstyle" target="_blank" rel="noopener noreferrer" className="block mt-1 hover:underline" style={{ color: 'inherit' }}>
                                 {t.footer.credit}
                             </a>
                         </p>
